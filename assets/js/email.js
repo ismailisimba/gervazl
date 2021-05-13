@@ -1,7 +1,14 @@
 console.log("dkvbdbv");
 let reqString = "https://script.google.com/macros/s/AKfycbw39czh1LjMDSNlVJjUueIwwLMSfzfyBMrzmEPaPeqXfs3UzCDdKSDqtFds7fhA_IPQ/exec";
 
-document.getElementById("sendmyregards").style.backgroundColor ="red";
+window.onload = () => {
+   let oldNode = document.getElementById("sendmyregards");
+   let newNode = oldNode.cloneNode(true);
+   oldNode.parentNode.replaceChild(newNode,oldNode);
+   let newDiv = document.createElement("div");
+   document.getElementById("sendmyregards").addEventListener("click",sendAStrangersHail);
+}
+
 
 function sendAStrangersHail(){
 
@@ -25,7 +32,7 @@ function sendAStrangersHail(){
     contextObject.params[0]["dataObj"] = deId;
   
    startHailing(contextObject,"hollacomoestas",function(){
-       window.location.reload();
+      // window.location.reload();
    });
     
   }
@@ -77,13 +84,7 @@ function sendAStrangersHail(){
             
           })
           .catch(function(error) {
-            var p = document.createElement('p');
-            p.appendChild(
-              document.createTextNode('Error: ' + error.message)
-            );
-            tempDiv = document.querySelectorAll(".mycolumns")[1];
-            tempDiv2 = document.querySelectorAll(".googlestuff")[0];
-            tempDiv.insertBefore(p, tempDiv2);
+            alert(error)
           });
   
         
