@@ -1,7 +1,18 @@
-console.log("dkvbdbv");
+//console.log("dkvbdbv");
 let reqString = "https://script.google.com/macros/s/AKfycbw39czh1LjMDSNlVJjUueIwwLMSfzfyBMrzmEPaPeqXfs3UzCDdKSDqtFds7fhA_IPQ/exec";
 
 window.onload = () => {
+  let styles = window.getComputedStyle(document.querySelectorAll(".customimagecontainer")[0]);
+  let val = styles.getPropertyValue("width");
+  console.log(val);
+  let containers = document.querySelectorAll(".customimagecontainer");
+  containers.forEach(element=>{
+    let images = element.querySelectorAll("img");
+    images.forEach(image=>{
+      image.style.minWidth=val;
+    })
+  })
+
    let oldNode = document.getElementById("sendmyregards");
    let newNode = oldNode.cloneNode(true);
    oldNode.parentNode.replaceChild(newNode,oldNode);

@@ -25,7 +25,7 @@
     
 }
 .customimagecontainer::-webkit-scrollbar{width: 0px !important;}
-.customimagecontainer img, #hu760po1{
+.customimagecontainer img{
  min-width: 240px;
     width: 100%;
     height: auto;
