@@ -8,7 +8,7 @@
 }
 
 .customimagecontainer{
-    width: auto;
+    width: 100%;
     position: relative;
     height: 600px;
     padding: 24px 12px;
@@ -24,8 +24,9 @@
     -ms-overflow-style: none;
     
 }
-.customimagecontainer::-webkit-scrollbar{width: none;}
-.customimagecontainer img{
+.customimagecontainer::-webkit-scrollbar{width: 0px !important;}
+.customimagecontainer img, #hu760po1{
+ min-width: 240px;
     width: 100%;
     height: auto;
     padding: 12px 12px;
