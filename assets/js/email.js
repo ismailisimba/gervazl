@@ -4,12 +4,15 @@ let reqString = "https://script.google.com/macros/s/AKfycbw39czh1LjMDSNlVJjUueIw
 window.onload = () => {
   let styles = window.getComputedStyle(document.querySelectorAll(".customimagecontainer")[0]);
   let val = styles.getPropertyValue("width");
+  val = val.slice(0, val.length-2)
+  val = parseInt(val,10);
+  val = 0.69*val;
   console.log(val);
   let containers = document.querySelectorAll(".customimagecontainer");
   containers.forEach(element=>{
     let images = element.querySelectorAll("img");
     images.forEach(image=>{
-      image.style.minWidth=val;
+      image.style.minWidth=val+"px";
     })
   })
 
