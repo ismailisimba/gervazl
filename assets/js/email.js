@@ -2,25 +2,14 @@
 let reqString = "https://script.google.com/macros/s/AKfycbw39czh1LjMDSNlVJjUueIwwLMSfzfyBMrzmEPaPeqXfs3UzCDdKSDqtFds7fhA_IPQ/exec";
 
 window.onload = () => {
-  let styles = window.getComputedStyle(document.querySelectorAll(".customimagecontainer")[0]);
-  let val = styles.getPropertyValue("width");
-  val = val.slice(0, val.length-2)
-  val = parseInt(val,10);
-  val = 0.69*val;
-  console.log(val);
-  let containers = document.querySelectorAll(".customimagecontainer");
-  containers.forEach(element=>{
-    let images = element.querySelectorAll("img");
-    images.forEach(image=>{
-      image.style.minWidth=val+"px";
-    })
-  })
 
    let oldNode = document.getElementById("sendmyregards");
    let newNode = oldNode.cloneNode(true);
    oldNode.parentNode.replaceChild(newNode,oldNode);
    let newDiv = document.createElement("div");
    document.getElementById("sendmyregards").addEventListener("click",sendAStrangersHail);
+
+   addCustomEventListeners();
 }
 
 
@@ -107,3 +96,24 @@ function sendAStrangersHail(){
   
       // tempDiv.innerHTML = Object.entries(localVar.values)[0][1][3] ;   
   };
+
+
+  function  addCustomEventListeners(){
+    let myHeads = document.querySelectorAll(".customworkmenulist")[0].querySelectorAll("h3");
+    document.body.addEventListener("click",function(){
+      console.log("Stop Touching me!!!")
+    })
+    document.querySelectorAll("body")[0].addEventListener("scroll",function(){
+      console.log(window.scrollX);
+    })
+    myHeads.forEach(head=>{
+      head.addEventListener("click",navigateToDisHead)
+    })
+  };
+
+  function navigateToDisHead(){
+    console.log(this.id);
+    console.log(window.scrollY);
+    console.log(window.scrollX);
+    console.log(document.getElementById("wrapper").scrollHeight);
+  }
