@@ -160,52 +160,21 @@ function sendAStrangersHail(){
 
       myWorkHeads.forEach(head=>{
         head.addEventListener("click",()=>{
-          document.getElementById("bg").scrollBy({
-            top: 500,
-            left: 0,
-            behavior: 'smooth'
-          });
-          document.getElementById("wrapper").scrollBy({
-            top: 500,
-            left: 0,
-            behavior: 'smooth'
-          });
-          console.log("everytime")
           switch(head.id){
             case 'workone':
-            document.body.scrollBy({
-          top: -500,
-          left: 0,
-          behavior: 'smooth'
-        });
+            document.getElementById("portraitcont").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
             break;
             case 'worktwo':
-              document.getElementById("eventthead").scrollTo({
-          top: getOffsetObj(document.querySelectorAll(".customworkmenu")[0]).top+48,
-          left: 0,
-          behavior: 'smooth'
-        });
+              document.getElementById("eventcont").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
                 break;
             case 'workthree':
-              document.getElementById("corphead").scrollTo({
-          top: getOffsetObj(document.querySelectorAll(".customworkmenu")[0]).top+48,
-          left: 0,
-          behavior: 'smooth'
-        });
+              document.getElementById("corpcont").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
                 break;
             case 'workfour':
-              document.getElementById("designhead").scrollTo({
-          top: getOffsetObj(document.querySelectorAll(".customworkmenu")[0]).top+48,
-          left: 0,
-          behavior: 'smooth'
-        });
+              document.getElementById("designcont").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
                 break;
             default:
-              document.getElementById("portraithead").scrollTo({
-          top: getOffsetObj(document.querySelectorAll(".customworkmenu")[0]).top+48,
-          left: 0,
-          behavior: 'smooth'
-        });
+              document.getElementById("portraitcont").scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
           }
         })
       })
@@ -255,28 +224,4 @@ function myCustomScrollFunc (className,parent){
         });
     }
 
-}
-
-
-
-
-function getOffsetObj (){
-  //var bodyRect = document.querySelectorAll(".canvas")[0].getBoundingClientRect();
-  var bodyRect = document.body.getBoundingClientRect();
-  var elemRect = document.querySelectorAll(".customworkmenu")[0].getBoundingClientRect();
-  const offSetObj = {};
- // offSetObj["top"]  = elemRect.top - bodyRect.top;
-  offSetObj["left"]  = elemRect.left - bodyRect.left;
-  offSetObj["right"]  = Math.abs(elemRect.right - bodyRect.right);
-  offSetObj["bottom"]  = Math.abs(elemRect.bottom - bodyRect.bottom);
-  offSetObj["parHeight"] = bodyRect.height;
-  offSetObj["parWidth"] = bodyRect.width;
-  offSetObj["chiWidth"] = elemRect.width;
-  offSetObj["chiHeight"] = elemRect.height;
-
-  console.log(offSetObj);
-  offSetObj["top"] = 1800;
-
-
- return offSetObj;
 }
