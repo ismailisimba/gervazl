@@ -1,15 +1,24 @@
 //console.log("dkvbdbv");
 let reqString = "https://script.google.com/macros/s/AKfycbw39czh1LjMDSNlVJjUueIwwLMSfzfyBMrzmEPaPeqXfs3UzCDdKSDqtFds7fhA_IPQ/exec";
+const localObj = {};
 
 window.onload = () => {
 
    let oldNode = document.getElementById("sendmyregards");
    let newNode = oldNode.cloneNode(true);
    oldNode.parentNode.replaceChild(newNode,oldNode);
-   let newDiv = document.createElement("div");
-   document.getElementById("sendmyregards").addEventListener("click",sendAStrangersHail);
+   let newDiv = document.createElement("button");
 
-   addCustomEventListeners();
+   newDiv.addEventListener("click",sendAStrangersHail,true);
+   newDiv.style.width = "186px";
+   newDiv.style.height = "auto";
+   newDiv.style.fontSize = "12px";
+   newDiv.innerText = " Send Message ";
+   document.getElementById("sendmyregards").replaceWith(newDiv);
+
+ //  addCustomEventListeners();
+
+    document.querySelectorAll("nav")[0].querySelectorAll("ul")[0].querySelectorAll("li")[1].addEventListener("click",workActions,true);
 }
 
 
@@ -34,7 +43,7 @@ function sendAStrangersHail(){
     contextObject.params[0]["token"] = "wHaT tOkEn!";
     contextObject.params[0]["dataObj"] = deId;
   
-   startHailing(contextObject,"hollacomoestas",function(){
+   startHailing(contextObject,"hollacomoestasgervaz",function(){
       // window.location.reload();
    });
     
@@ -87,7 +96,7 @@ function sendAStrangersHail(){
             
           })
           .catch(function(error) {
-            console.log(error);
+              console.log(error.message);
           });
   
         
@@ -117,3 +126,157 @@ function sendAStrangersHail(){
     console.log(window.scrollX);
     console.log(document.getElementById("wrapper").scrollHeight);
   }
+
+
+  function workActions (e) {
+    console.log(e);
+    console.log(e.target)
+
+    let timeOut1 = window.setTimeout(()=>{
+      let cont1 = document.querySelectorAll(".customoutercontainer")[0];
+      let myWorkHeads = document.querySelectorAll(".customworkmenulist")[0].querySelectorAll("h3");
+      localObj["height"]= getPosStyles(cont1).height;
+      localObj["width"]= getPosStyles(cont1).width;
+      let images = document.getElementById("work").querySelectorAll("img");
+      images.forEach(img=>{
+        img.style.height = (.85*localObj.height)+"px";
+      })
+
+      let leftButts = document.querySelectorAll(".custom-left-arrow");
+      let rightButts = document.querySelectorAll(".custom-right-arrow");
+
+      leftButts.forEach(butt=>{
+        butt.addEventListener("click",()=>{
+          myCustomScrollFunc(butt.className,butt.parentNode);
+        })
+      })
+
+      rightButts.forEach(butt=>{
+        butt.addEventListener("click",()=>{
+          myCustomScrollFunc(butt.className,butt.parentNode);
+        })
+      })
+
+
+      myWorkHeads.forEach(head=>{
+        head.addEventListener("click",()=>{
+          document.getElementById("bg").scrollBy({
+            top: 500,
+            left: 0,
+            behavior: 'smooth'
+          });
+          document.getElementById("wrapper").scrollBy({
+            top: 500,
+            left: 0,
+            behavior: 'smooth'
+          });
+          console.log("everytime")
+          switch(head.id){
+            case 'workone':
+            document.body.scrollBy({
+          top: -500,
+          left: 0,
+          behavior: 'smooth'
+        });
+            break;
+            case 'worktwo':
+              document.getElementById("eventthead").scrollTo({
+          top: getOffsetObj(document.querySelectorAll(".customworkmenu")[0]).top+48,
+          left: 0,
+          behavior: 'smooth'
+        });
+                break;
+            case 'workthree':
+              document.getElementById("corphead").scrollTo({
+          top: getOffsetObj(document.querySelectorAll(".customworkmenu")[0]).top+48,
+          left: 0,
+          behavior: 'smooth'
+        });
+                break;
+            case 'workfour':
+              document.getElementById("designhead").scrollTo({
+          top: getOffsetObj(document.querySelectorAll(".customworkmenu")[0]).top+48,
+          left: 0,
+          behavior: 'smooth'
+        });
+                break;
+            default:
+              document.getElementById("portraithead").scrollTo({
+          top: getOffsetObj(document.querySelectorAll(".customworkmenu")[0]).top+48,
+          left: 0,
+          behavior: 'smooth'
+        });
+          }
+        })
+      })
+
+      window.clearTimeout(timeOut1);
+    },696)
+    
+  }
+
+
+
+  function getPosStyles(ele){
+    const eleCompStyles = window.getComputedStyle(ele);
+    const stylesObj = {};
+    const elemRect = ele.getBoundingClientRect();
+    stylesObj["left"] = eleCompStyles.getPropertyValue("left");
+    stylesObj["top"] = eleCompStyles.getPropertyValue("top");
+    stylesObj["fontFam"] = eleCompStyles.getPropertyValue("font-family");
+    stylesObj["width"] = elemRect.width;
+    stylesObj["height"] = elemRect.height;
+    stylesObj.left = stylesObj.left.slice(0,stylesObj.left.length-2);
+    stylesObj.left = parseInt(stylesObj.left,10);
+    stylesObj.top = stylesObj.top.slice(0,stylesObj.top.length-2);
+    stylesObj.top = parseInt(stylesObj.top,10);
+
+    return stylesObj;
+};
+
+
+function myCustomScrollFunc (className,parent){
+  console.log(className);
+  console.log(parent)
+
+      
+    if(className==="custom-left-arrow"){
+        parent.querySelectorAll(".customimagecontainer")[0].scrollBy({
+            top: 0,
+            left: -269,
+            behavior: 'smooth'
+          });
+
+    }else{ 
+        parent.querySelectorAll(".customimagecontainer")[0].scrollBy({
+            top: 0,
+            left: 269,
+            behavior: 'smooth'
+        });
+    }
+
+}
+
+
+
+
+function getOffsetObj (){
+  //var bodyRect = document.querySelectorAll(".canvas")[0].getBoundingClientRect();
+  var bodyRect = document.body.getBoundingClientRect();
+  var elemRect = document.querySelectorAll(".customworkmenu")[0].getBoundingClientRect();
+  const offSetObj = {};
+ // offSetObj["top"]  = elemRect.top - bodyRect.top;
+  offSetObj["left"]  = elemRect.left - bodyRect.left;
+  offSetObj["right"]  = Math.abs(elemRect.right - bodyRect.right);
+  offSetObj["bottom"]  = Math.abs(elemRect.bottom - bodyRect.bottom);
+  offSetObj["parHeight"] = bodyRect.height;
+  offSetObj["parWidth"] = bodyRect.width;
+  offSetObj["chiWidth"] = elemRect.width;
+  offSetObj["chiHeight"] = elemRect.height;
+
+  console.log(offSetObj);
+  offSetObj["top"] = 1800;
+
+
+ return offSetObj;
+}
