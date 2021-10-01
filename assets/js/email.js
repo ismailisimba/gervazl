@@ -87,7 +87,7 @@ function sendAStrangersHail(){
             
           })
           .catch(function(error) {
-            alert(error)
+            console.log(error);
           });
   
         
@@ -100,9 +100,9 @@ function sendAStrangersHail(){
 
   function  addCustomEventListeners(){
     let myHeads = document.querySelectorAll(".customworkmenulist")[0].querySelectorAll("h3");
-    document.body.addEventListener("click",function(){
+   /* document.body.addEventListener("click",function(){
       console.log("Stop Touching me!!!")
-    })
+    })*/
     document.querySelectorAll("body")[0].addEventListener("scroll",function(){
       console.log(window.scrollX);
     })
