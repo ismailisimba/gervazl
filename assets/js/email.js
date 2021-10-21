@@ -23,12 +23,21 @@ window.onload = () => {
     window.addEventListener("scroll",(e)=>{
       localObj["scrollHeight"] = document.getElementById("work").scrollHeight;
       localObj["top"] = Math.abs(document.getElementById("work").getBoundingClientRect().top);
+      localObj["boundingRect"] = Math.abs(document.getElementById("work").getBoundingClientRect());
     })
     imageconts.forEach(ele=>{
       let imagesinside = ele.querySelectorAll("img");
       imagesinside.forEach(imgin=>{
         imgin.addEventListener("click",(e)=>{
-          showMeUp(imgin.cloneNode(true));
+          const width = window.screen.width;
+          const height = window.screen.height;
+          if(height/width>width/height){
+            //taller than wide
+            showMeUp(imgin.cloneNode(true),"wide");
+          }else{
+            //wider than taller
+            showMeUp(imgin.cloneNode(true),"wide");
+          }
         })
       })
     })
@@ -239,46 +248,141 @@ function myCustomScrollFunc (className,parent){
 }
 
 
-function  showMeUp(ele){
-    const deBox = document.createElement("div");
-    const mom = document.getElementById("wrapper");
-    deBox.id = "thisismybox";
-    deBox.className = "thisismybox";
-    deBox.style.width = (1.2*window.screen.width)+"px";
-    deBox.style.height = (1.2*window.screen.height)+"px";
-    deBox.style.backgroundColor = "black";
-    deBox.style.display = "flex";
-    deBox.style.flexFlow = "column";
-    deBox.style.flexWrap = "no-wrap";
-    deBox.style.justifyContent = "center";
-    deBox.style.alignItems = "center";
-    deBox.style.zIndex = 1000;
-    deBox.style.position = "absolute";
-    deBox.style.top = (localObj.top-24)+"px";
-    deBox.style.right = (1.2*window.screen.width)+"px";
-    deBox.style.transition = "all 1.3s ease-out";
+function  showMeUp(ele,orientation){
 
-    ele.style.height = (0.69*window.screen.height)+"px";
-    ele.style.width = "auto";
+  if(orientation=="wide"){
+
+    const deBox = makeMySpecialBox();
     const remImgs = deBox.querySelectorAll("img");
+    const mom = document.getElementById("wrapper");
+
+    ele.style.height = (0.65*window.screen.height)+"px";
+    ele.style.width = "auto";
+    
     if(remImgs.length>0&&remImgs[0].nodeType){
       remImgs.forEach(ele=>ele.remove());
     }
     deBox.appendChild(ele);
     
-    mom.style.overflowX = "hidden";
-    document.getElementsByTagName("html")[0].style.overflowY = "hidden";
+   
     
     const remDebox = mom.querySelectorAll(".thisismybox");
     if(remDebox.length>0&&remDebox[0].nodeType){
       remDebox.forEach(ele=>ele.remove());
     }
     mom.appendChild(deBox);
-    deBox.style.right = "-10%";
-    deBox.addEventListener("click",e=>{
+
+    const timeoutOne = window.setTimeout(()=>{
+      deBox.style.right = "-10%";
+      
+      const timeoutTwo = window.setTimeout(()=>{
+        mom.style.overflowX = "hidden";
+        mom.style.overflowY = "hidden";
+        document.getElementsByTagName("html")[0].style.overflowY = "hidden";
+        window.clearTimeout(timeoutTwo);
+      },100)
+
+      window.clearTimeout(timeoutOne);
+    },369)
+    
+    
+    document.getElementById("thisismyclosearrow").addEventListener("click",e=>{
       e.stopPropagation();
       deBox.querySelectorAll("img")[0].addEventListener("click",e=>e.stopPropagation());
-      deBox.remove();
+      deBox.style.right = (-1.2*window.screen.width)+"px";
+      const timeoutThree = window.setTimeout(()=>{
+        deBox.remove();
+        window.clearTimeout(timeoutThree);
+      },1369);
       document.getElementsByTagName("html")[0].style.overflowY = "scroll";
+      //mom.style.overflowY = "scroll";
     });
+
+  }else{
+    const deBox = makeMySpecialBox();
+    const remImgs = deBox.querySelectorAll("img");
+    const mom = document.getElementById("wrapper");
+
+    ele.style.width = (0.85*window.screen.width)+"px";
+    ele.style.height = "auto";
+    
+    if(remImgs.length>0&&remImgs[0].nodeType){
+      remImgs.forEach(ele=>ele.remove());
+    }
+    deBox.appendChild(ele);
+    
+   
+    
+    const remDebox = mom.querySelectorAll(".thisismybox");
+    if(remDebox.length>0&&remDebox[0].nodeType){
+      remDebox.forEach(ele=>ele.remove());
+    }
+    mom.appendChild(deBox);
+
+    const timeoutOne = window.setTimeout(()=>{
+      deBox.style.right = "-10%";
+      
+      const timeoutTwo = window.setTimeout(()=>{
+        mom.style.overflowX = "hidden";
+        mom.style.overflowY = "hidden";
+        document.getElementsByTagName("html")[0].style.overflowY = "hidden";
+        window.clearTimeout(timeoutTwo);
+      },100)
+
+      window.clearTimeout(timeoutOne);
+    },369)
+    
+    
+    document.getElementById("thisismyclosearrow").addEventListener("click",e=>{
+      e.stopPropagation();
+      deBox.querySelectorAll("img")[0].addEventListener("click",e=>e.stopPropagation());
+      deBox.style.right = (-1.2*window.screen.width)+"px";
+      const timeoutThree = window.setTimeout(()=>{
+        deBox.remove();
+        window.clearTimeout(timeoutThree);
+      },1369);
+      document.getElementsByTagName("html")[0].style.overflowY = "scroll";
+      //mom.style.overflowY = "scroll";
+    });
+
+  }
+}
+
+
+function makeMySpecialBox(){
+  const imagepresenter = document.createElement("div");
+  imagepresenter.id = "thisismybox";
+  imagepresenter.className = "thisismybox";
+  imagepresenter.style.width = (1.2*window.screen.width)+"px";
+  imagepresenter.style.height = (1.2*window.screen.height)+"px";
+  imagepresenter.style.backgroundColor = "black";
+  imagepresenter.style.display = "flex";
+  imagepresenter.style.flexFlow = "column";
+  imagepresenter.style.flexWrap = "no-wrap";
+  imagepresenter.style.justifyContent = "center";
+  imagepresenter.style.alignItems = "center";
+  imagepresenter.style.zIndex = 1000;
+  imagepresenter.style.position = "absolute";
+  imagepresenter.style.overflow = "hidden";
+  imagepresenter.style.top = (localObj.top-(0.1*window.screen.height))+"px";
+  imagepresenter.style.right = (1.2*window.screen.width)+"px";
+  imagepresenter.style.transition = "all 1.3s ease-out";
+  imagepresenter.addEventListener("click",e=>e.stopPropagation());
+
+
+  const closearrow = document.createElement("button");
+  closearrow.id="thisismyclosearrow";
+  closearrow.style.backgroundImage = `url(https://ismizo.com/projects/gervaz/customres/cancel_white_24dp.svg)`;
+  closearrow.style.backgroundRepeat = "no-repeat";
+  closearrow.style.backgroundPosition = "center";
+  closearrow.style.backgroundSize = "contain";
+  closearrow.style.position = "absolute";
+  closearrow.style.top = (0.175*window.screen.height)+"px";
+  closearrow.style.width = "48px";
+  closearrow.style.boxSizing = "border-box";
+  closearrow.style.padding = "6px 12px";
+
+  imagepresenter.appendChild(closearrow);
+
+  return imagepresenter;
 }
