@@ -280,20 +280,20 @@ function  showMeUp(ele,orientation){
         mom.style.overflowY = "hidden";
         document.getElementsByTagName("html")[0].style.overflowY = "hidden";
         window.clearTimeout(timeoutTwo);
-      },100)
+      },10)
 
       window.clearTimeout(timeoutOne);
-    },369)
+    },30)
     
     
     document.getElementById("thisismyclosearrow").addEventListener("click",e=>{
       e.stopPropagation();
       deBox.querySelectorAll("img")[0].addEventListener("click",e=>e.stopPropagation());
-      deBox.style.right = (-1.2*window.screen.width)+"px";
+      //deBox.style.right = (-1.2*window.screen.width)+"px";
       const timeoutThree = window.setTimeout(()=>{
         deBox.remove();
         window.clearTimeout(timeoutThree);
-      },1369);
+      },50);
       document.getElementsByTagName("html")[0].style.overflowY = "scroll";
       //mom.style.overflowY = "scroll";
     });
@@ -327,20 +327,20 @@ function  showMeUp(ele,orientation){
         mom.style.overflowY = "hidden";
         document.getElementsByTagName("html")[0].style.overflowY = "hidden";
         window.clearTimeout(timeoutTwo);
-      },100)
+      },10)
 
       window.clearTimeout(timeoutOne);
-    },369)
+    },30)
     
     
     document.getElementById("thisismyclosearrow").addEventListener("click",e=>{
       e.stopPropagation();
       deBox.querySelectorAll("img")[0].addEventListener("click",e=>e.stopPropagation());
-      deBox.style.right = (-1.2*window.screen.width)+"px";
+     // deBox.style.right = (-1.2*window.screen.width)+"px";
       const timeoutThree = window.setTimeout(()=>{
         deBox.remove();
         window.clearTimeout(timeoutThree);
-      },1369);
+      },50);
       document.getElementsByTagName("html")[0].style.overflowY = "scroll";
       //mom.style.overflowY = "scroll";
     });
@@ -365,7 +365,8 @@ function makeMySpecialBox(){
   imagepresenter.style.position = "absolute";
   imagepresenter.style.overflow = "hidden";
   imagepresenter.style.top = (localObj.top-(0.1*window.screen.height))+"px";
-  imagepresenter.style.right = (1.2*window.screen.width)+"px";
+  //imagepresenter.style.right = (1.2*window.screen.width)+"px";
+  imagepresenter.style.right = "-10%";
   imagepresenter.style.transition = "all 1.3s ease-out";
   imagepresenter.addEventListener("click",e=>e.stopPropagation());
 
